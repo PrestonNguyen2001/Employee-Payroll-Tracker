@@ -8,10 +8,44 @@ const collectEmployees = function() {
 
     // Loop to prompt for employee data
     while (true) {
-      const firstName = prompt("Enter First Name:");
-      const lastName = prompt("Enter Last Name:");
-      const salary = parseFloat(prompt("Enter Salary:"));
+      let firstName, lastName, salary;
 
+      while (true) {
+        firstName = prompt("Enter First Name:");
+      // Validate if first name input contains only letters
+        if (/^[a-zA-Z]+$/.test(firstName)) {
+          break;
+        }
+        alert("Invalid input for first name. Please enter letters only.");
+      }
+
+      while (true) {
+        lastName = prompt("Enter Last Name:");
+      // Validate if last name input contains only letters
+        if (/^[a-zA-Z]+$/.test(lastName)) {
+          break;
+        }
+        alert("Invalid input for last name. Please enter letters only.");
+      }
+
+      // Check if the employee has already been added
+      const isEmployeeExists = employees.some(employee => employee.firstName === firstName && employee.lastName === lastName);
+        if (isEmployeeExists) {
+            alert("Employee already added.");
+            continue;
+        }
+
+      while (true) {
+        const salaryInput = prompt("Enter Salary:");
+        salary = parseFloat(salaryInput);
+      // Validate if salary input is a number
+        if (!isNaN(salary)) {
+          break;
+        }
+        alert("Invalid input for salary. Please enter a valid number.");
+      }
+
+      
       // Creates an employee object with the user input
       const employee = {
         firstName: firstName,
