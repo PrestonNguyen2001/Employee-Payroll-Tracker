@@ -4,17 +4,66 @@ const addEmployeesBtn = document.querySelector('#add-employees-btn');
 // Collect employee data
 const collectEmployees = function() {
   // TODO: Get user input to create and return an array of employee objects
+    const employees = [];
+
+    // Loop to prompt for employee data
+    while (true) {
+      const firstName = prompt("Enter First Name:");
+      const lastName = prompt("Enter Last Name:");
+      const salary = parseFloat(prompt("Enter Salary:"));
+
+      // Creates an employee object with the user input
+      const employee = {
+        firstName: firstName,
+        lastName: lastName,
+        salary: salary
+      };
+
+      // Add the employee object to the employees array
+      employees.push(employee);
+
+      // Prompt to continue adding employees or cancel
+      const continueInput = confirm("Would you like to add another employee?");
+
+      // If the user selects cancel, the loop will break
+      if (!continueInput) {
+        break;
+      }
+    }
+
+    // Sort the employees array by last name
+    employees.sort((a, b) => a.lastName.localeCompare(b.lastName));
+
+    // Return the employees array
+    return employees;
 }
 
 // Display the average salary
 const displayAverageSalary = function(employeesArray) {
   // TODO: Calculate and display the average salary
+  const totalSalary = employeesArray.reduce((acc, employee) => acc + employee.salary, 0);
+  const averageSalary = totalSalary / employeesArray.length;
+
+  // Log the average salary with the appropriate formatting
+  console.log(`The average salary between our ${employeesArray.length} employees is ${averageSalary.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD"
+  })}`);
 }
 
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
   // TODO: Select and display a random employee
-}
+  const randomIndex = Math.floor(Math.random() * employeesArray.length);
+  const randomEmployee = employeesArray[randomIndex];
+  
+  // Capitalize the first letter of the employee's first and last name
+  const capitalizedFirstName = capitalizeFirstLetter(randomEmployee.firstName);
+  const capitalizedLastName = capitalizeFirstLetter(randomEmployee.lastName);
+  
+  // Log the ranomly selected employee
+  console.log(`Congratulations to ${capitalizedFirstName} ${capitalizedLastName}, our random drawing winner!`);
+};
 
 /*
   ====================
