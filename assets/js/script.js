@@ -1,6 +1,11 @@
 // Get a reference to the #add-employees-btn element
 const addEmployeesBtn = document.querySelector('#add-employees-btn');
 
+// Function to capitalize first letter of a string
+const capitalizeFirstLetter = function(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 // Collect employee data
 const collectEmployees = function() {
   // TODO: Get user input to create and return an array of employee objects
@@ -87,15 +92,17 @@ const displayAverageSalary = function(employeesArray) {
 
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
-  // TODO: Select and display a random employee
+  // Select a random index
   const randomIndex = Math.floor(Math.random() * employeesArray.length);
+  
+  // Get the random employee
   const randomEmployee = employeesArray[randomIndex];
   
   // Capitalize the first letter of the employee's first and last name
   const capitalizedFirstName = capitalizeFirstLetter(randomEmployee.firstName);
   const capitalizedLastName = capitalizeFirstLetter(randomEmployee.lastName);
   
-  // Log the ranomly selected employee
+  // Log the randomly selected employee
   console.log(`Congratulations to ${capitalizedFirstName} ${capitalizedLastName}, our random drawing winner!`);
 };
 
